@@ -1,60 +1,60 @@
 /* Estilos globais para o corpo da página */
 body {
-  font-family: "Inter", sans-serif; /* Usando a fonte Inter */
-  display: flex;
-  justify-content: center; /* Centraliza horizontalmente */
-  align-items: flex-start; /* Alinha no topo verticalmente */
-  min-height: 100vh;
-  background-color: #f0f2f5; /* Cor de fundo suave */
-  margin: 20px;
-  box-sizing: border-box; /* Inclui padding e borda na largura/altura total */
+    font-family: 'Inter', sans-serif; /* Usando a fonte Inter */
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: flex-start; /* Alinha no topo verticalmente */
+    min-height: 100vh;
+    background-color: #f0f2f5; /* Cor de fundo suave */
+    margin: 20px;
+    box-sizing: border-box; /* Inclui padding e borda na largura/altura total */
 }
 
 /* Estilos para os containers de login e aplicação */
 #login-container {
-  background-color: #ffffff; /* Fundo branco */
-  padding: 30px;
-  border-radius: 12px; /* Cantos mais arredondados */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
-  width: 100%;
-  max-width: 600px; /* Largura máxima para melhor visualização em telas maiores */
-  text-align: center;
-  box-sizing: border-box;
-  display: flex; /* Adicionado para flexbox */
-  flex-direction: column; /* Organiza os itens em coluna */
-  gap: 15px; /* Espaçamento entre os elementos */
+    background-color: #ffffff; /* Fundo branco */
+    padding: 30px;
+    border-radius: 12px; /* Cantos mais arredondados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
+    width: 100%;
+    max-width: 600px; /* Largura máxima para melhor visualização em telas maiores */
+    text-align: center;
+    box-sizing: border-box;
+    display: flex; /* Adicionado para flexbox */
+    flex-direction: column; /* Organiza os itens em coluna */
+    gap: 15px; /* Espaçamento entre os elementos */
 }
 
 /* O app-container não será mais flex para evitar conflitos de layout */
 #app-container {
-  background-color: #ffffff; /* Fundo branco */
-  padding: 30px;
-  border-radius: 12px; /* Cantos mais arredondados */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
-  width: 100%;
-  max-width: 600px; /* Largura máxima para melhor visualização em telas maiores */
-  text-align: center;
-  box-sizing: border-box;
-  /* Removido display: flex, flex-direction e gap daqui */
+    background-color: #ffffff; /* Fundo branco */
+    padding: 30px;
+    border-radius: 12px; /* Cantos mais arredondados */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra mais pronunciada */
+    width: 100%;
+    max-width: 600px; /* Largura máxima para melhor visualização em telas maiores */
+    text-align: center;
+    box-sizing: border-box;
+    /* Removido display: flex, flex-direction e gap daqui */
 }
 
 /* As telas internas (gerenciamento, treino, dieta) serão flex individualmente */
 #workout-management-screen,
 #training-screen-container,
 #diet-screen-container {
-  display: flex; /* Mantém o layout flex para os elementos internos de cada tela */
-  flex-direction: column;
-  gap: 15px;
-  padding: 0; /* Ajuste o padding se necessário, pois o app-container já tem */
-  width: 100%; /* Adicionado para garantir que ocupe a largura total */
-  box-sizing: border-box; /* Adicionado para incluir padding e borda na largura */
+    display: flex; /* Mantém o layout flex para os elementos internos de cada tela */
+    flex-direction: column;
+    gap: 15px;
+    padding: 0; /* Ajuste o padding se necessário, pois o app-container já tem */
+    width: 100%; /* Adicionado para garantir que ocupe a largura total */
+    box-sizing: border-box; /* Adicionado para incluir padding e borda na largura */
 }
 
-h1,
-h2 {
-  color: #333333; /* Cor de texto mais escura */
-  margin-bottom: 25px;
-  font-weight: 600; /* Fonte um pouco mais pesada */
+
+h1, h2 {
+    color: #333333; /* Cor de texto mais escura */
+    margin-bottom: 25px;
+    font-weight: 600; /* Fonte um pouco mais pesada */
 }
 
 /* Estilos para campos de entrada de texto, número, senha e select */
@@ -63,14 +63,14 @@ input[type="number"],
 input[type="password"],
 textarea,
 select {
-  width: calc(100% - 20px); /* Ocupa quase 100% da largura com padding */
-  padding: 12px;
-  margin-bottom: 10px; /* Ajustado para melhor espaçamento com gap do flexbox */
-  border: 1px solid #cccccc; /* Borda mais suave */
-  border-radius: 8px; /* Cantos arredondados */
-  box-sizing: border-box;
-  font-size: 16px;
-  transition: border-color 0.3s ease; /* Transição suave na borda */
+    width: calc(100% - 20px); /* Ocupa quase 100% da largura com padding */
+    padding: 12px;
+    margin-bottom: 10px; /* Ajustado para melhor espaçamento com gap do flexbox */
+    border: 1px solid #cccccc; /* Borda mais suave */
+    border-radius: 8px; /* Cantos arredondados */
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease; /* Transição suave na borda */
 }
 
 input[type="text"]:focus,
@@ -78,583 +78,579 @@ input[type="number"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-  border-color: #007bff; /* Borda azul ao focar */
-  outline: none; /* Remove o contorno padrão do navegador */
+    border-color: #007bff; /* Borda azul ao focar */
+    outline: none; /* Remove o contorno padrão do navegador */
 }
 
 textarea {
-  resize: vertical; /* Permite redimensionar verticalmente */
-  min-height: 60px; /* Altura mínima para observações */
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 60px; /* Altura mínima para observações */
 }
 
 /* Estilos para botões */
 button {
-  background-color: #007bff; /* Azul primário */
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px; /* Cantos arredondados */
-  cursor: pointer;
-  font-size: 17px;
-  font-weight: 500;
-  margin-top: 5px; /* Ajustado para melhor espaçamento com gap do flexbox */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra leve para botões */
+    background-color: #007bff; /* Azul primário */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px; /* Cantos arredondados */
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: 500;
+    margin-top: 5px; /* Ajustado para melhor espaçamento com gap do flexbox */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra leve para botões */
 }
 
 button:hover {
-  background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
-  transform: translateY(-2px); /* Efeito de "levantar" */
+    background-color: #0056b3; /* Azul mais escuro ao passar o mouse */
+    transform: translateY(-2px); /* Efeito de "levantar" */
 }
 
 button:active {
-  transform: translateY(0); /* Retorna à posição original ao clicar */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Sombra menor ao clicar */
+    transform: translateY(0); /* Retorna à posição original ao clicar */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Sombra menor ao clicar */
 }
 
 /* Estilo para mensagens de erro */
 .error-message {
-  color: #dc3545; /* Vermelho para erros */
-  margin-top: 10px;
-  font-size: 0.9em;
-  font-weight: 500;
+    color: #dc3545; /* Vermelho para erros */
+    margin-top: 10px;
+    font-size: 0.9em;
+    font-weight: 500;
 }
 
 /* Estilos para a navegação principal (Treinos / Dieta) */
 #main-navigation {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 25px;
-  border-bottom: 2px solid #e0e0e0;
-  padding-bottom: 10px;
-  gap: 10px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+    gap: 10px;
 }
 
 .nav-button {
-  background-color: #f0f2f5; /* Cor de fundo padrão */
-  color: #555;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 8px 8px 0 0; /* Cantos arredondados apenas no topo */
-  cursor: pointer;
-  font-size: 1.1em;
-  font-weight: 600;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  margin-top: 0; /* Anula margem padrão do botão */
-  box-shadow: none; /* Anula sombra padrão do botão */
-  width: 120px; /* Largura fixa para os botões de navegação */
-  flex-shrink: 0; /* Impede que os botões encolham */
-  flex-grow: 0; /* Impede que os botões cresçam */
+    background-color: #f0f2f5; /* Cor de fundo padrão */
+    color: #555;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px 8px 0 0; /* Cantos arredondados apenas no topo */
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-top: 0; /* Anula margem padrão do botão */
+    box-shadow: none; /* Anula sombra padrão do botão */
+    width: 120px; /* Largura fixa para os botões de navegação */
+    flex-shrink: 0; /* Impede que os botões encolham */
+    flex-grow: 0; /* Impede que os botões cresçam */
 }
 
 .nav-button.active {
-  background-color: #007bff; /* Azul para a aba ativa */
-  color: white;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #007bff; /* Azul para a aba ativa */
+    color: white;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .nav-button:hover:not(.active) {
-  background-color: #e0e0e0;
+    background-color: #e0e0e0;
 }
+
 
 /* Estilos para a seção de gerenciamento de treinos e dieta */
-#workout-management,
-#diet-management {
-  display: flex;
-  flex-wrap: wrap; /* Permite que os itens quebrem linha */
-  gap: 10px; /* Espaçamento entre os itens */
-  margin-bottom: 25px;
-  align-items: center;
-  justify-content: center;
+#workout-management, #diet-management {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os itens quebrem linha */
+    gap: 10px; /* Espaçamento entre os itens */
+    margin-bottom: 25px;
+    align-items: center;
+    justify-content: center;
 }
 
-#workout-management label,
-#diet-management label {
-  font-weight: 600;
-  color: #555;
-  margin-right: 5px;
+#workout-management label, #diet-management label {
+    font-weight: 600;
+    color: #555;
+    margin-right: 5px;
 }
 
-#workout-management select,
-#diet-management select {
-  flex-grow: 1; /* Ocupa o espaço disponível */
-  max-width: 200px; /* Limita a largura do select */
-  margin-bottom: 0; /* Remove margem inferior padrão */
+#workout-management select, #diet-management select {
+    flex-grow: 1; /* Ocupa o espaço disponível */
+    max-width: 200px; /* Limita a largura do select */
+    margin-bottom: 0; /* Remove margem inferior padrão */
 }
 
-#workout-management button,
-#diet-management button {
-  margin-top: 0; /* Remove margem superior padrão */
-  padding: 10px 15px;
-  font-size: 0.95em;
+#workout-management button, #diet-management button {
+    margin-top: 0; /* Remove margem superior padrão */
+    padding: 10px 15px;
+    font-size: 0.95em;
 }
 
 /* Estilos para o formulário de adicionar exercício e dieta */
-#add-exercise-form,
-#add-diet-item-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  margin-bottom: 25px;
-  background-color: #f9f9f9;
+#add-exercise-form, #add-diet-item-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    background-color: #f9f9f9;
 }
 
-#add-exercise-form label,
-#add-diet-item-form label {
-  text-align: left;
-  font-weight: 600;
-  color: #555;
-  margin-bottom: -5px; /* Aproxima o label do input */
+#add-exercise-form label, #add-diet-item-form label {
+    text-align: left;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: -5px; /* Aproxima o label do input */
 }
+
 
 /* Estilos para a lista de treinos e dieta */
-#workout-list,
-#diet-list {
-  list-style: none; /* Remove marcadores de lista */
-  padding: 0;
-  margin-top: 20px;
+#workout-list, #diet-list {
+    list-style: none; /* Remove marcadores de lista */
+    padding: 0;
+    margin-top: 20px;
 }
 
 /* Estilos para cada item da lista de treinos */
 #workout-list li {
-  background-color: #e9ecef; /* Fundo cinza claro para os itens */
-  padding: 15px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column; /* Empilha os detalhes e botões */
-  align-items: flex-start; /* Alinha os itens à esquerda */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombra sutil */
+    background-color: #e9ecef; /* Fundo cinza claro para os itens */
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* Empilha os detalhes e botões */
+    align-items: flex-start; /* Alinha os itens à esquerda */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Sombra sutil */
 }
 
 .exercise-details {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
-  margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
-.exercise-details span,
-.exercise-details p {
-  color: #495057; /* Cor de texto para informações do exercício */
-  font-size: 1.05em;
-  font-weight: 500;
-  margin-bottom: 5px;
-  text-align: left;
+.exercise-details span, .exercise-details p {
+    color: #495057; /* Cor de texto para informações do exercício */
+    font-size: 1.05em;
+    font-weight: 500;
+    margin-bottom: 5px;
+    text-align: left;
 }
 
-.rest-time-info,
-.observation-info {
-  font-size: 0.9em;
-  color: #6c757d;
-  margin-top: 3px;
+.rest-time-info, .observation-info {
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-top: 3px;
 }
 
 .exercise-buttons {
-  display: flex;
-  gap: 10px; /* Espaçamento entre os botões */
-  width: 100%;
-  justify-content: flex-end; /* Alinha os botões à direita */
+    display: flex;
+    gap: 10px; /* Espaçamento entre os botões */
+    width: 100%;
+    justify-content: flex-end; /* Alinha os botões à direita */
 }
 
 #workout-list li button {
-  margin-left: 0; /* Remove margem esquerda padrão */
-  padding: 8px 12px;
-  font-size: 0.85em;
-  margin-top: 0; /* Remove a margem superior padrão do botão */
-  box-shadow: none; /* Remove sombra para botões menores */
+    margin-left: 0; /* Remove margem esquerda padrão */
+    padding: 8px 12px;
+    font-size: 0.85em;
+    margin-top: 0; /* Remove a margem superior padrão do botão */
+    box-shadow: none; /* Remove sombra para botões menores */
 }
 
 /* Estilo específico para o botão de editar */
-#workout-list li .edit-button,
-.diet-item-buttons .edit-button {
-  background-color: #ffc107; /* Amarelo para editar */
-  color: #333333;
+#workout-list li .edit-button, .diet-item-buttons .edit-button {
+    background-color: #ffc107; /* Amarelo para editar */
+    color: #333333;
 }
 
-#workout-list li .edit-button:hover,
-.diet-item-buttons .edit-button:hover {
-  background-color: #e0a800; /* Amarelo mais escuro ao passar o mouse */
+#workout-list li .edit-button:hover, .diet-item-buttons .edit-button:hover {
+    background-color: #e0a800; /* Amarelo mais escuro ao passar o mouse */
 }
 
 /* Estilo específico para o botão de remover */
-#workout-list li .remove-button,
-.diet-item-buttons .remove-button {
-  background-color: #dc3545; /* Vermelho para remover */
+#workout-list li .remove-button, .diet-item-buttons .remove-button {
+    background-color: #dc3545; /* Vermelho para remover */
 }
 
-#workout-list li .remove-button:hover,
-.diet-item-buttons .remove-button:hover {
-  background-color: #c82333; /* Vermelho mais escuro ao passar o mouse */
+#workout-list li .remove-button:hover, .diet-item-buttons .remove-button:hover {
+    background-color: #c82333; /* Vermelho mais escuro ao passar o mouse */
 }
 
 /* Estilos para botões primários (ex: Iniciar Treino) */
 .primary-button {
-  background-color: #28a745; /* Verde */
-  margin-top: 20px;
+    background-color: #28a745; /* Verde */
+    margin-top: 20px;
 }
 
 .primary-button:hover {
-  background-color: #218838;
+    background-color: #218838;
 }
 
 /* Estilos para a tela de treino */
 #training-screen-container {
-  padding: 30px;
-  gap: 20px; /* Mais espaçamento na tela de treino */
+    padding: 30px;
+    gap: 20px; /* Mais espaçamento na tela de treino */
 }
 
 #training-workout-name {
-  font-size: 1.8em;
-  color: #007bff;
-  margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #007bff;
+    margin-bottom: 20px;
 }
 
 .exercise-display {
-  background-color: #e9ecef;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  text-align: left;
+    background-color: #e9ecef;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: left;
 }
 
 .exercise-display h3 {
-  font-size: 1.5em;
-  color: #333;
-  margin-top: 0;
-  margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
 }
 
 .exercise-display p {
-  font-size: 1.1em;
-  color: #555;
-  margin-bottom: 5px;
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 5px;
 }
 
 .info-message {
-  font-size: 1.2em;
-  color: #007bff;
-  font-weight: 600;
-  margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #007bff;
+    font-weight: 600;
+    margin-bottom: 15px;
 }
 
 .timer-display {
-  font-size: 2em;
-  font-weight: bold;
-  color: #dc3545; /* Vermelho para o timer */
-  margin-bottom: 20px;
+    font-size: 2em;
+    font-weight: bold;
+    color: #dc3545; /* Vermelho para o timer */
+    margin-bottom: 20px;
 }
 
 .training-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 /* Estilos para o botão "Iniciar Descanso" - Cor Verde para Ação */
 #start-rest-button {
-  background-color: #28a745; /* Verde vibrante */
+    background-color: #28a745; /* Verde vibrante */
 }
 
 #start-rest-button:hover {
-  background-color: #218838; /* Verde mais escuro no hover */
+    background-color: #218838; /* Verde mais escuro no hover */
 }
 
 /* Estilos para os botões de navegação (Próximo e Anterior) - Cor Azul para Navegação */
 #previous-exercise-button,
 #next-exercise-button {
-  background-color: #17a2b8; /* Azul claro */
+    background-color: #17a2b8; /* Azul claro */
 }
 
 #previous-exercise-button:hover,
 #next-exercise-button:hover {
-  background-color: #138496; /* Azul mais escuro no hover */
+    background-color: #138496; /* Azul mais escuro no hover */
 }
 
 .training-buttons .secondary-button {
-  background-color: #6c757d; /* Cinza para finalizar */
+    background-color: #6c757d; /* Cinza para finalizar */
 }
 
 .training-buttons .secondary-button:hover {
-  background-color: #5a6268;
+    background-color: #5a6268;
 }
 
 .success-message {
-  color: #28a745;
-  font-size: 1.3em;
-  font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 10px;
+    color: #28a745;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 /* Estilos para a visão geral de todos os exercícios na tela de treino */
 #all-exercises-overview {
-  margin-top: 30px;
-  padding: 15px;
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
-  text-align: left;
+    margin-top: 30px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    text-align: left;
 }
 
 #all-exercises-overview h4 {
-  color: #333;
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 1.1em;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1em;
 }
 
 #all-exercises-overview ul {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px; /* Espaçamento entre os itens da lista */
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px; /* Espaçamento entre os itens da lista */
 }
 
 #all-exercises-overview li {
-  background-color: #ffffff;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 0.9em;
-  color: #555;
-  border: 1px solid #ddd;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+    background-color: #ffffff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.9em;
+    color: #555;
+    border: 1px solid #ddd;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 #all-exercises-overview li.current-exercise-highlight {
-  background-color: #d1ecf1; /* Azul claro para destaque */
-  border-color: #007bff;
-  font-weight: bold;
-  color: #0056b3;
+    background-color: #d1ecf1; /* Azul claro para destaque */
+    border-color: #007bff;
+    font-weight: bold;
+    color: #0056b3;
 }
 
 /* Estilos para a tela de dieta */
 #diet-screen-container {
-  /* Já tem estilos básicos do container geral */
+    /* Já tem estilos básicos do container geral */
 }
 
 #diet-management {
-  /* Já tem estilos básicos do workout-management */
+    /* Já tem estilos básicos do workout-management */
 }
 
 #add-diet-item-form {
-  /* Já tem estilos básicos do add-exercise-form */
+    /* Já tem estilos básicos do add-exercise-form */
 }
 
 #diet-meals-container {
-  margin-top: 20px;
-  text-align: left;
+    margin-top: 20px;
+    text-align: left;
 }
 
 .meal-section {
-  background-color: #e9ecef;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    background-color: #e9ecef;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
 }
 
 .meal-section h3 {
-  color: #007bff;
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 1.3em;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .meal-section h3 button {
-  margin-left: 10px;
-  padding: 5px 10px;
-  font-size: 0.8em;
-  margin-top: 0;
-  box-shadow: none;
+    margin-left: 10px;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    margin-top: 0;
+    box-shadow: none;
 }
 
 .meal-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
 .meal-section li {
-  background-color: #f8f9fa;
-  padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 6px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #eee;
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #eee;
 }
 
 .meal-item-details {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .meal-item-details strong {
-  font-size: 1.1em;
-  color: #333;
-  margin-bottom: 5px;
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 5px;
 }
 
 .meal-item-details span {
-  font-size: 0.9em;
-  color: #666;
+    font-size: 0.9em;
+    color: #666;
 }
 
 .diet-item-buttons {
-  display: flex;
-  gap: 5px;
-  margin-left: 10px;
+    display: flex;
+    gap: 5px;
+    margin-left: 10px;
 }
 
 .diet-item-buttons button {
-  padding: 5px 10px;
-  font-size: 0.8em;
-  margin-top: 0;
-  box-shadow: none;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    margin-top: 0;
+    box-shadow: none;
 }
 
-.meal-summary,
-.diet-total-summary {
-  background-color: #e2f0fb; /* Azul claro para resumos */
-  padding: 15px;
-  border-radius: 8px;
-  margin-top: 15px;
-  font-weight: bold;
-  color: #0056b3;
-  text-align: left;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+.meal-summary, .diet-total-summary {
+    background-color: #e2f0fb; /* Azul claro para resumos */
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #0056b3;
+    text-align: left;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.05);
 }
 
-.meal-summary p,
-.diet-total-summary p {
-  margin: 5px 0;
-  font-size: 0.95em;
+.meal-summary p, .diet-total-summary p {
+    margin: 5px 0;
+    font-size: 0.95em;
 }
 
 .summary-box {
-  margin-top: 30px;
-  padding: 20px;
-  background-color: #f0f8ff; /* Cor mais clara para o total */
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  text-align: left;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f0f8ff; /* Cor mais clara para o total */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    text-align: left;
 }
 
 .summary-box h3 {
-  color: #007bff;
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-size: 1.4em;
+    color: #007bff;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.4em;
 }
 
 .summary-box span {
-  color: #333;
+    color: #333;
 }
+
 
 /* Responsividade para telas menores */
 @media (max-width: 600px) {
-  #login-container,
-  #app-container,
-  #training-screen-container,
-  #diet-screen-container {
-    padding: 20px;
-    margin: 10px;
-  }
+    #login-container, #app-container, #training-screen-container, #diet-screen-container {
+        padding: 20px;
+        margin: 10px;
+    }
 
-  input[type="text"],
-  input[type="number"],
-  input[type="password"],
-  textarea,
-  select {
-    width: 100%; /* Ocupa a largura total em telas pequenas */
-    margin-bottom: 10px;
-  }
+    input[type="text"],
+    input[type="number"],
+    input[type="password"],
+    textarea,
+    select {
+        width: 100%; /* Ocupa a largura total em telas pequenas */
+        margin-bottom: 10px;
+    }
 
-  button {
-    width: 100%; /* Ocupa a largura total em telas pequenas */
-    margin-top: 10px;
-  }
+    button {
+        width: 100%; /* Ocupa a largura total em telas pequenas */
+        margin-top: 10px;
+    }
 
-  #workout-management,
-  #diet-management {
-    flex-direction: column; /* Empilha os itens */
-    align-items: stretch; /* Estica para a largura total */
-  }
+    /* Ajustes para títulos em telas menores */
+    h1 {
+        font-size: 1.8em;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
 
-  #workout-management select,
-  #workout-management button,
-  #diet-management select,
-  #diet-management button {
-    width: 100%;
-    max-width: none; /* Remove o limite de largura */
-  }
+    #workout-management, #diet-management {
+        flex-direction: column; /* Empilha os itens */
+        align-items: stretch; /* Estica para a largura total */
+    }
 
-  #add-exercise-form,
-  #add-diet-item-form {
-    gap: 8px; /* Reduz o espaçamento */
-  }
+    #workout-management select,
+    #workout-management button,
+    #diet-management select,
+    #diet-management button {
+        width: 100%;
+        max-width: none; /* Remove o limite de largura */
+    }
 
-  .exercise-buttons,
-  .diet-item-buttons {
-    flex-direction: column; /* Empilha os botões */
-    align-items: stretch; /* Estica os botões */
-  }
+    #add-exercise-form, #add-diet-item-form {
+        gap: 8px; /* Reduz o espaçamento */
+    }
 
-  #workout-list li button,
-  .diet-item-buttons button {
-    width: 100%; /* Ocupa a largura total em telas pequenas */
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 5px;
-  }
+    .exercise-buttons, .diet-item-buttons {
+        flex-direction: column; /* Empilha os botões */
+        align-items: stretch; /* Estica os botões */
+    }
 
-  .training-buttons {
-    flex-direction: column; /* Empilha os botões de treino */
-    gap: 10px;
-  }
+    #workout-list li button, .diet-item-buttons button {
+        width: 100%; /* Ocupa a largura total em telas pequenas */
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 5px;
+    }
 
-  #all-exercises-overview ul {
-    flex-direction: column; /* Empilha os exercícios na visão geral */
-    align-items: flex-start;
-  }
+    .training-buttons {
+        flex-direction: column; /* Empilha os botões de treino */
+        gap: 10px;
+    }
 
-  #all-exercises-overview li {
-    width: 100%; /* Ocupa a largura total */
-  }
+    #all-exercises-overview ul {
+        flex-direction: column; /* Empilha os exercícios na visão geral */
+        align-items: flex-start;
+    }
 
-  .meal-section h3 {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .meal-section h3 button {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 10px;
-  }
+    #all-exercises-overview li {
+        width: 100%; /* Ocupa a largura total */
+    }
 
-  .meal-section li {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .diet-item-buttons {
-    width: 100%;
-    justify-content: flex-start;
-    margin-top: 10px;
-  }
+    .meal-section h3 {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .meal-section h3 button {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .meal-section li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .diet-item-buttons {
+        width: 100%;
+        justify-content: flex-start;
+        margin-top: 10px;
+    }
+
+    /* Ajuste para os botões de navegação em telas pequenas */
+    .nav-button {
+        width: calc(50% - 5px); /* Cada botão ocupa ~metade da largura, com espaçamento */
+        padding: 8px 15px; /* Reduz o padding */
+        font-size: 1em; /* Reduz o tamanho da fonte */
+    }
 }
