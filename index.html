@@ -38,7 +38,7 @@
                 <button id="delete-workout-button">Excluir Treino Atual</button>
             </div>
 
-            <!-- Formulário para adicionar novos exercícios -->
+           <!-- Formulário para adicionar novos exercícios -->
             <div id="add-exercise-form">
                 <label for="predefined-exercises">Exercícios Padrão:</label>
                 <select id="predefined-exercises"></select>
@@ -62,6 +62,8 @@
             </ul>
             <!-- Botão para iniciar o treino -->
             <button id="start-training-button" class="primary-button">Iniciar Treino Selecionado</button>
+            <!-- NOVO BOTÃO DE EXPORTAR PDF PARA TREINOS -->
+            <button id="export-workout-pdf-button" class="secondary-button">Exportar Treino para PDF</button>
             <!-- Botão para sair da aplicação -->
             <button id="logout-button">Sair</button>
         </div>
@@ -101,7 +103,7 @@
                 <button id="delete-diet-button">Excluir Dieta Atual</button>
             </div>
 
-            <!-- Formulário para adicionar novos itens à dieta -->
+ <!-- Formulário para adicionar novos itens à dieta -->
             <div id="add-diet-item-form">
                 <label for="predefined-foods">Nome da Refeição:</label>
                 <input type="text" id="meal-name" placeholder="Nome da Refeição (ex: Café da Manhã)">
@@ -130,11 +132,18 @@
                 <p>Proteínas Totais: <span id="total-protein">0</span> g</p>
                 <p>Carboidratos Totais: <span id="total-carb">0</span> g</p>
             </div>
+            <!-- NOVO BOTÃO DE EXPORTAR PDF PARA DIETAS -->
+            <button id="export-diet-pdf-button" class="secondary-button">Exportar Dieta para PDF</button>
         </div>
 
     </div>
 
-    <!-- Link para o arquivo JavaScript de lógica -->
+    <!-- Bibliotecas para Exportação de PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Seus scripts -->
     <script src="script.js"></script>
+    <script src="pdfExport.js"></script> <!-- NOVO ARQUIVO JAVASCRIPT -->
 </body>
 </html>
