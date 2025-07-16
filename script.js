@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const restTimerDisplay = document.getElementById('rest-timer-display');
     const startRestButton = document.getElementById('start-rest-button');
     const previousExerciseButton = document.getElementById('previous-exercise-button');
-    const nextExerciseButton = document.getElementById('next-exercise-button'); // Corrigido o erro de digitação aqui
+    const nextExerciseButton = document.getElementById('next-exercise-button');
     const finishWorkoutButton = document.getElementById('finish-workout-button');
     const workoutFinishedMessage = document.getElementById('workout-finished-message');
     const allExercisesOverview = document.getElementById('all-exercises-overview');
@@ -950,26 +950,23 @@ document.addEventListener('DOMContentLoaded', () => {
         mainInfo.textContent = `${exercise.name} - ${exercise.sets} Séries - ${exercise.reps} Repetições`;
         exerciseDetails.appendChild(mainInfo);
 
-        if (exercise.exerciseLoad) { // Exibe a carga se existir
-            const loadInfo = document.createElement('span');
-            loadInfo.classList.add('load-info');
-            loadInfo.textContent = `Carga: ${exercise.exerciseLoad}`;
-            exerciseDetails.appendChild(loadInfo);
-        }
+        // Exibe a carga, mostrando "N/A" se estiver vazia
+        const loadInfo = document.createElement('span');
+        loadInfo.classList.add('load-info');
+        loadInfo.textContent = `Carga: ${exercise.exerciseLoad || 'N/A'}`; // Exibe N/A se vazio
+        exerciseDetails.appendChild(loadInfo);
 
-        if (exercise.restTime) {
-            const restInfo = document.createElement('span');
-            restInfo.classList.add('rest-time-info');
-            restInfo.textContent = `Descanso: ${exercise.restTime}`;
-            exerciseDetails.appendChild(restInfo);
-        }
+        // Exibe o tempo de descanso, mostrando "N/A" se estiver vazio
+        const restInfo = document.createElement('span');
+        restInfo.classList.add('rest-time-info');
+        restInfo.textContent = `Descanso: ${exercise.restTime || 'N/A'}`; // Exibe N/A se vazio
+        exerciseDetails.appendChild(restInfo);
 
-        if (exercise.observation) {
-            const obsInfo = document.createElement('p');
-            obsInfo.classList.add('observation-info');
-            obsInfo.textContent = `Obs: ${exercise.observation}`;
-            exerciseDetails.appendChild(obsInfo);
-        }
+        // Exibe as observações, mostrando "N/A" se estiver vazio
+        const obsInfo = document.createElement('p');
+        obsInfo.classList.add('observation-info');
+        obsInfo.textContent = `Obs: ${exercise.observation || 'N/A'}`; // Exibe N/A se vazio
+        exerciseDetails.appendChild(obsInfo);
 
         li.appendChild(exerciseDetails);
 
@@ -1116,9 +1113,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <h3>${exercise.name}</h3>
             <p>Séries: ${exercise.sets}</p>
             <p>Repetições: ${exercise.reps}</p>
-            ${exercise.exerciseLoad ? `<p>Carga: ${exercise.exerciseLoad}</p>` : ''} <!-- Exibe a carga -->
-            ${exercise.restTime ? `<p>Descanso: ${exercise.restTime}</p>` : ''}
-            ${exercise.observation ? `<p>Observações: ${exercise.observation}</p>` : ''}
+            <p>Carga: ${exercise.exerciseLoad || 'N/A'}</p> <!-- Exibe a carga, mostrando N/A se vazio -->
+            <p>Descanso: ${exercise.restTime || 'N/A'}</p>
+            <p>Observações: ${exercise.observation || 'N/A'}</p>
         `;
         setsRemainingDisplay.textContent = `Séries restantes: ${setsRemaining}`;
 
@@ -1294,7 +1291,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Agrupa os itens por nome da refeição e depois por horário
         const mealsGrouped = {};
         dietPlan.forEach(item => {
-            const key = `${item.mealName}-${item.mealTime}`; // Combina nome e hora para agrupar
+            // Usa o nome da refeição e o horário para criar uma chave única para o agrupamento
+            const key = `${item.mealName}-${item.mealTime || 'sem-horario'}`;
             if (!mealsGrouped[key]) {
                 mealsGrouped[key] = {
                     mealName: item.mealName,
@@ -1307,10 +1305,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Converte o objeto agrupado em um array e ordena por horário
         const sortedMeals = Object.values(mealsGrouped).sort((a, b) => {
+            // Ordena primeiro por horário (se ambos tiverem), depois por nome da refeição
             if (a.mealTime && b.mealTime) {
                 return a.mealTime.localeCompare(b.mealTime);
             }
-            return 0;
+            // Coloca itens sem horário no final
+            if (!a.mealTime && b.mealTime) return 1;
+            if (a.mealTime && !b.mealTime) return -1;
+            return a.mealName.localeCompare(b.mealName); // Ordena por nome se horários forem iguais ou ausentes
         });
 
         sortedMeals.forEach(mealGroup => {
@@ -1334,7 +1336,8 @@ document.addEventListener('DOMContentLoaded', () => {
         mealSectionDiv.dataset.mealTime = mealTime;
 
         const mealHeader = document.createElement('h3');
-        mealHeader.textContent = `${mealName} ${mealTime ? `(${mealTime})` : ''}`; // Exibe o horário
+        // Exibe o horário da refeição, mostrando "Horário não definido" se estiver vazio
+        mealHeader.textContent = `${mealName} ${mealTime ? `(${mealTime})` : '(Horário não definido)'}`;
 
         const mealButtonsDiv = document.createElement('div');
         mealButtonsDiv.classList.add('meal-buttons');
@@ -1370,8 +1373,8 @@ document.addEventListener('DOMContentLoaded', () => {
             itemDetails.classList.add('meal-item-details');
             itemDetails.innerHTML = `
                 <strong>${item.foodName}</strong> (${item.quantity}g)<br>
-                <span>Kcal: ${item.calculatedKcal} | Prot: ${item.calculatedProtein}g | Carb: ${item.calculatedCarb}g</span>
-                ${item.observation ? `<span>Obs: ${item.observation}</span>` : ''}
+                <span>Kcal: ${item.calculatedKcal || '0'} | Prot: ${item.calculatedProtein || '0'}g | Carb: ${item.calculatedCarb || '0'}g</span>
+                <span>Obs: ${item.observation || 'N/A'}</span>
             `;
             li.appendChild(itemDetails);
 
