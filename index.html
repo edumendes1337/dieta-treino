@@ -1,181 +1,129 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Gerenciador de Treinos e Dieta</title>
     <!-- Link para o arquivo CSS de estilos -->
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
     <!-- Container da tela de login -->
     <div id="login-container">
-      <h2>Login</h2>
-      <input type="text" id="username" placeholder="Usuário" />
-      <input type="password" id="password" placeholder="Senha" />
-      <button id="login-button">Entrar</button>
-      <p id="login-error" class="error-message"></p>
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Usuário">
+        <input type="password" id="password" placeholder="Senha">
+        <button id="login-button">Entrar</button>
+        <p id="login-error" class="error-message"></p>
     </div>
 
     <!-- Container geral da aplicação - inicialmente oculto -->
-    <div id="app-container" style="display: none">
-      <!-- Botões de Navegação entre Telas -->
-      <div id="main-navigation">
-        <button id="show-workouts-button" class="nav-button active">
-          Treinos
-        </button>
-        <button id="show-diet-button" class="nav-button">Dieta</button>
-      </div>
+    <div id="app-container" style="display:none;">
 
-      <!-- Seção da tela de gerenciamento de treinos -->
-      <div id="workout-management-screen">
-        <h1>Meu Treino de Academia</h1>
-
-        <!-- Seção para seleção e gerenciamento de variações de treino -->
-        <div id="workout-management">
-          <label for="workout-selector">Selecionar Treino:</label>
-          <select id="workout-selector"></select>
-          <button id="add-workout-button">Novo Treino</button>
-          <button id="delete-workout-button">Excluir Treino Atual</button>
+        <!-- Botões de Navegação entre Telas -->
+        <div id="main-navigation">
+            <button id="show-workouts-button" class="nav-button active">Treinos</button>
+            <button id="show-diet-button" class="nav-button">Dieta</button>
         </div>
 
-        <!-- Formulário para adicionar novos exercícios -->
-        <div id="add-exercise-form">
-          <label for="predefined-exercises">Exercícios Padrão:</label>
-          <select id="predefined-exercises"></select>
-          <input
-            type="text"
-            id="exercise-name"
-            placeholder="Nome do Exercício (ou digite um novo)"
-          />
-          <input type="number" id="sets" placeholder="Séries" />
-          <input
-            type="text"
-            id="reps"
-            placeholder="Repetições (ex: 10 ou 6-8)"
-          />
-          <input
-            type="text"
-            id="rest-time"
-            placeholder="Tempo de Descanso (ex: 60s)"
-          />
-          <textarea
-            id="observation"
-            placeholder="Observações (opcional)"
-          ></textarea>
-          <button id="add-exercise-button">Adicionar Exercício</button>
-        </div>
-        <!-- Lista onde os exercícios serão exibidos -->
-        <ul id="workout-list">
-          <!-- Exercícios serão adicionados aqui via JavaScript -->
-        </ul>
-        <!-- Botão para iniciar o treino -->
-        <button id="start-training-button" class="primary-button">
-          Iniciar Treino Selecionado
-        </button>
-        <!-- Botão para sair da aplicação -->
-        <button id="logout-button">Sair</button>
-      </div>
+        <!-- Seção da tela de gerenciamento de treinos -->
+        <div id="workout-management-screen">
+            <h1>Meu Treino de Academia</h1>
 
-      <!-- Nova Tela de Treino - inicialmente oculta -->
-      <div id="training-screen-container" style="display: none">
-        <h2 id="training-workout-name"></h2>
-        <div id="current-exercise-display" class="exercise-display">
-          <!-- Detalhes do exercício atual serão exibidos aqui -->
-        </div>
-        <p id="sets-remaining-display" class="info-message"></p>
-        <p id="rest-timer-display" class="timer-display"></p>
+            <!-- Seção para seleção e gerenciamento de variações de treino -->
+            <div id="workout-management">
+                <label for="workout-selector">Selecionar Treino:</label>
+                <select id="workout-selector"></select>
+                <button id="add-workout-button">Novo Treino</button>
+                <button id="delete-workout-button">Excluir Treino Atual</button>
+            </div>
 
-        <div class="training-buttons">
-          <button
-            id="previous-exercise-button"
-            class="action-button"
-            style="display: none"
-          >
-            Exercício Anterior
-          </button>
-          <button id="start-rest-button" class="action-button">
-            Iniciar Descanso
-          </button>
-          <button
-            id="next-exercise-button"
-            class="action-button"
-            style="display: none"
-          >
-            Próximo Exercício
-          </button>
-        </div>
-        <p
-          id="workout-finished-message"
-          class="success-message"
-          style="display: none"
-        >
-          Treino Finalizado! Parabéns!
-        </p>
-        <button id="finish-workout-button" class="secondary-button">
-          Finalizar Treino
-        </button>
-
-        <!-- Visão geral de todos os exercícios -->
-        <div id="all-exercises-overview">
-          <!-- A lista de exercícios será renderizada aqui -->
-        </div>
-      </div>
-
-      <!-- Nova Tela de Dieta - inicialmente oculta -->
-      <div id="diet-screen-container" style="display: none">
-        <h1>Meu Plano de Dieta</h1>
-
-        <!-- Seção para seleção e gerenciamento de variações de dieta -->
-        <div id="diet-management">
-          <label for="diet-selector">Selecionar Dieta:</label>
-          <select id="diet-selector"></select>
-          <button id="add-diet-button">Nova Dieta</button>
-          <button id="delete-diet-button">Excluir Dieta Atual</button>
+            <!-- Formulário para adicionar novos exercícios -->
+            <div id="add-exercise-form">
+                <label for="predefined-exercises">Exercícios Padrão:</label>
+                <select id="predefined-exercises"></select>
+                <input type="text" id="exercise-name" placeholder="Nome do Exercício (ou digite um novo)">
+                <input type="number" id="sets" placeholder="Séries">
+                <input type="text" id="reps" placeholder="Repetições (ex: 10 ou 6-8)">
+                <input type="text" id="exercise-load" placeholder="Carga (ex: 10kg, 5lb)"> <!-- Novo campo -->
+                <input type="text" id="rest-time" placeholder="Tempo de Descanso (ex: 60s)">
+                <textarea id="observation" placeholder="Observações (opcional)"></textarea>
+                <button id="add-exercise-button">Adicionar Exercício</button>
+            </div>
+            <!-- Lista onde os exercícios serão exibidos -->
+            <ul id="workout-list">
+                <!-- Exercícios serão adicionados aqui via JavaScript -->
+            </ul>
+            <!-- Botão para iniciar o treino -->
+            <button id="start-training-button" class="primary-button">Iniciar Treino Selecionado</button>
+            <!-- Botão para sair da aplicação -->
+            <button id="logout-button">Sair</button>
         </div>
 
-        <!-- Formulário para adicionar novos itens à dieta -->
-        <div id="add-diet-item-form">
-          <input
-            type="text"
-            id="meal-name"
-            placeholder="Nome da Refeição (ex: Café da Manhã)"
-          />
-          <label for="predefined-foods">Alimentos Padrão:</label>
-          <select id="predefined-foods"></select>
-          <input
-            type="text"
-            id="food-item-name"
-            placeholder="Nome do Alimento (ou digite um novo)"
-          />
-          <input
-            type="number"
-            id="food-quantity"
-            placeholder="Quantidade (gramas)"
-          />
-          <textarea
-            id="diet-item-observation"
-            placeholder="Observações (opcional)"
-          ></textarea>
-          <button id="add-diet-item-button">Adicionar Alimento</button>
+        <!-- Nova Tela de Treino - inicialmente oculta -->
+        <div id="training-screen-container" style="display:none;">
+            <h2 id="training-workout-name"></h2>
+            <div id="current-exercise-display" class="exercise-display">
+                <!-- Detalhes do exercício atual serão exibidos aqui -->
+            </div>
+            <p id="sets-remaining-display" class="info-message"></p>
+            <p id="rest-timer-display" class="timer-display"></p>
+
+            <div class="training-buttons">
+                <button id="previous-exercise-button" class="action-button" style="display:none;">Exercício Anterior</button>
+                <button id="start-rest-button" class="action-button">Iniciar Descanso</button>
+                <button id="next-exercise-button" class="action-button" style="display:none;">Próximo Exercício</button>
+            </div>
+            <p id="workout-finished-message" class="success-message" style="display:none;">Treino Finalizado! Parabéns!</p>
+            <button id="finish-workout-button" class="secondary-button">Finalizar Treino</button>
+
+            <!-- Visão geral de todos os exercícios -->
+            <div id="all-exercises-overview">
+                <!-- A lista de exercícios será renderizada aqui -->
+            </div>
         </div>
 
-        <!-- Lista onde os itens da dieta serão exibidos, agrupados por refeição -->
-        <div id="diet-meals-container">
-          <!-- Refeições e alimentos serão adicionados aqui via JavaScript -->
+        <!-- Nova Tela de Dieta - inicialmente oculta -->
+        <div id="diet-screen-container" style="display:none;">
+            <h1>Meu Plano de Dieta</h1>
+
+            <!-- Seção para seleção e gerenciamento de variações de dieta -->
+            <div id="diet-management">
+                <label for="diet-selector">Selecionar Dieta:</label>
+                <select id="diet-selector"></select>
+                <button id="add-diet-button">Nova Dieta</button>
+                <button id="delete-diet-button">Excluir Dieta Atual</button>
+            </div>
+
+            <!-- Formulário para adicionar novos itens à dieta -->
+            <div id="add-diet-item-form">
+                <input type="text" id="meal-name" placeholder="Nome da Refeição (ex: Café da Manhã)">
+                <input type="time" id="meal-time"> <!-- Novo campo -->
+                <label for="predefined-foods">Alimentos Padrão:</label>
+                <select id="predefined-foods"></select>
+                <input type="text" id="food-item-name" placeholder="Nome do Alimento (ou digite um novo)">
+                <input type="number" id="food-quantity" placeholder="Quantidade (gramas)">
+                <textarea id="diet-item-observation" placeholder="Observações (opcional)"></textarea>
+                <button id="add-diet-item-button">Adicionar Alimento</button>
+            </div>
+            
+            <!-- Lista onde os itens da dieta serão exibidos, agrupados por refeição -->
+            <div id="diet-meals-container">
+                <!-- Refeições e alimentos serão adicionados aqui via JavaScript -->
+            </div>
+
+            <!-- Resumo total da dieta -->
+            <div id="diet-total-summary" class="summary-box">
+                <h3>Total da Dieta:</h3>
+                <p>Calorias Totais: <span id="total-kcal">0</span> kcal</p>
+                <p>Proteínas Totais: <span id="total-protein">0</span> g</p>
+                <p>Carboidratos Totais: <span id="total-carb">0</span> g</p>
+            </div>
         </div>
 
-        <!-- Resumo total da dieta -->
-        <div id="diet-total-summary" class="summary-box">
-          <h3>Total da Dieta:</h3>
-          <p>Calorias Totais: <span id="total-kcal">0</span> kcal</p>
-          <p>Proteínas Totais: <span id="total-protein">0</span> g</p>
-          <p>Carboidratos Totais: <span id="total-carb">0</span> g</p>
-        </div>
-      </div>
     </div>
 
     <!-- Link para o arquivo JavaScript de lógica -->
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
