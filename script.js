@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Banco de Dados de Alimentos (Valores por 100g) ---
     const predefinedFoodsData = [
-                { name: 'Abacate, cru', kcal_per_100g: 96.1547086956522, protein_per_100g: 1.23913043478261, carb_per_100g: 6.0308695652174 },
+        { name: 'Abacate, cru', kcal_per_100g: 96.1547086956522, protein_per_100g: 1.23913043478261, carb_per_100g: 6.0308695652174 },
         { name: 'Abacaxi, cru', kcal_per_100g: 48.3222130434782, protein_per_100g: 0.858695652173913, carb_per_100g: 12.3346376811594 },
         { name: 'Abacaxi, polpa, congelada', kcal_per_100g: 30.5917991943359, protein_per_100g: 0.466666666666667, carb_per_100g: 7.79866666666666 },
         { name: 'Abadejo, filé, congelado, assado', kcal_per_100g: 111.615503451188, protein_per_100g: 23.525, carb_per_100g: 0 },
@@ -519,7 +519,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Nabo, cru', kcal_per_100g: 18.1866246376812, protein_per_100g: 1.20289855072464, carb_per_100g: 4.14710144927538 },
         { name: 'Nêspera, crua', kcal_per_100g: 42.5391988681952, protein_per_100g: 0.308333333333333, carb_per_100g: 11.5286666666667 },
         { name: 'Nhoque, batata, cozido', kcal_per_100g: 180.775273993413, protein_per_100g: 5.85833333333333, carb_per_100g: 36.78 },
-        { name: 'Noz, crua', kcal_per_100g: 620.060019790567, protein_per_100g: 13.9708005027771, carb_per_100g: 18.3638661638896 }
+        { name: 'Noz, crua', kcal_per_100g: 620.060019790567, protein_per_100g: 13.9708005027771, carb_per_100g: 18.3638661638896 },
         { name: 'Óleo, de babaçu', kcal_per_100g: 884, protein_per_100g: 0, carb_per_100g: 0 },
         { name: 'Óleo, de canola', kcal_per_100g: 884, protein_per_100g: 0, carb_per_100g: 0 },
         { name: 'Óleo, de girassol', kcal_per_100g: 884, protein_per_100g: 0, carb_per_100g: 0 },
@@ -675,7 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: 'Vagem, crua', kcal_per_100g: 24.8983579710145, protein_per_100g: 1.78623188405797, carb_per_100g: 5.34710144927536 },
         { name: 'Vatapá', kcal_per_100g: 254.893285724155, protein_per_100g: 5.99783354918162, carb_per_100g: 9.74849978415171 },
         { name: 'Virado à paulista', kcal_per_100g: 306.94678645132, protein_per_100g: 10.18125, carb_per_100g: 14.1090833333333 },
-        { name: 'Yakisoba', kcal_per_100g: 112.802041253408, protein_per_100g: 7.51666666666667, carb_per_100g: 18.2513333333333 },
+        { name: 'Yakisoba', kcal_per_100g: 112.802041253408, protein_per_100g: 7.51666666666667, carb_per_100g: 18.2513333333333 }
 
     ];
 
