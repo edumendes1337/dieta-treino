@@ -97,12 +97,17 @@
 
             <!-- Formulário para adicionar novos itens à dieta -->
             <div id="add-diet-item-form">
+                <label for="predefined-foods">Nome da Refeição:</label>
                 <input type="text" id="meal-name" placeholder="Nome da Refeição (ex: Café da Manhã)">
+                <label for="predefined-foods">Horario da Refeição:</label>
                 <input type="time" id="meal-time"> <!-- Novo campo -->
                 <label for="predefined-foods">Alimentos Padrão:</label>
                 <select id="predefined-foods"></select>
+                <label for="predefined-foods">Alimentos não Tabelados:</label>
                 <input type="text" id="food-item-name" placeholder="Nome do Alimento (ou digite um novo)">
+                <label for="predefined-foods">Quantidade em gramas (g):</label>
                 <input type="number" id="food-quantity" placeholder="Quantidade (gramas)">
+                <label for="predefined-foods">Observações:</label>
                 <textarea id="diet-item-observation" placeholder="Observações (opcional)"></textarea>
                 <button id="add-diet-item-button">Adicionar Alimento</button>
             </div>
