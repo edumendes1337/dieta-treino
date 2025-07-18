@@ -79,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Banco de Dados de Alimentos (Valores por 100g) ---
     const predefinedFoodsData = [
+        { name: 'Whey da Growth Isolado 80%', kcal_per_100g: 396.66666, protein_per_100g: 80, carb_per_100g: 7.6666666 },
         { name: 'Abacate, cru', kcal_per_100g: 96.1547086956522, protein_per_100g: 1.23913043478261, carb_per_100g: 6.0308695652174 },
         { name: 'Abacaxi, cru', kcal_per_100g: 48.3222130434782, protein_per_100g: 0.858695652173913, carb_per_100g: 12.3346376811594 },
         { name: 'Abacaxi, polpa, congelada', kcal_per_100g: 30.5917991943359, protein_per_100g: 0.466666666666667, carb_per_100g: 7.79866666666666 },
