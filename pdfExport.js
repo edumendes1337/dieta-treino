@@ -1,11 +1,11 @@
-// pdfExport.js
+// NOVO CÓDIGO para pdfExport.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Obtenha referências aos botões de exportação
+    // Referências aos botões de exportação
     const exportWorkoutPdfButton = document.getElementById('export-workout-pdf-button');
     const exportDietPdfButton = document.getElementById('export-diet-pdf-button');
 
-    // Adicione event listeners aos botões
+    // Adiciona event listeners aos botões
     if (exportWorkoutPdfButton) {
         exportWorkoutPdfButton.addEventListener('click', exportCurrentWorkoutToPdf);
     }
@@ -14,12 +14,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /**
-     * Exporta o treino atualmente selecionado para um arquivo PDF.
+     * Exporta o treino atualmente selecionado para um arquivo PDF com TEXTO.
      */
     function exportCurrentWorkoutToPdf() {
-        // Obtenha o nome do treino atual do localStorage
         const currentWorkoutName = localStorage.getItem('currentWorkoutName');
-        // Obtenha todos os treinos do localStorage
         const allWorkouts = JSON.parse(localStorage.getItem('allWorkouts')) || {};
         const workoutData = allWorkouts[currentWorkoutName] || [];
 
@@ -28,92 +26,71 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Crie um elemento div temporário para renderizar o conteúdo do PDF
-        const pdfContentDiv = document.createElement('div');
-        pdfContentDiv.style.width = '210mm'; // Largura A4
-        pdfContentDiv.style.padding = '10mm';
-        pdfContentDiv.style.backgroundColor = '#fff'; // Fundo branco para o PDF
-        pdfContentDiv.style.boxSizing = 'border-box'; // Inclui padding na largura
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a4'); // 'p' = portrait, 'mm' = millimeters, 'a4' = A4 size
 
-        // Título do Treino
-        const title = document.createElement('h1');
-        title.textContent = `Treino: ${currentWorkoutName}`;
-        title.style.textAlign = 'center';
-        title.style.color = '#333';
-        pdfContentDiv.appendChild(title);
+        // ---- Configurações do Documento ----
+        const pageHeight = doc.internal.pageSize.height;
+        const margin = 15; // margem de 1.5 cm
+        let y = margin; // Posição vertical inicial
 
-        // Lista de Exercícios
-        const workoutListUl = document.createElement('ul');
-        workoutListUl.style.listStyle = 'none';
-        workoutListUl.style.padding = '0';
-        workoutListUl.style.marginTop = '20px';
+        // ---- Função para adicionar uma nova página se necessário ----
+        function checkPageBreak(requiredHeight) {
+            if (y + requiredHeight > pageHeight - margin) {
+                doc.addPage();
+                y = margin; // Reseta a posição para o topo da nova página
+            }
+        }
 
+        // ---- Título do Treino ----
+        doc.setFontSize(22);
+        doc.setFont("helvetica", "bold");
+        doc.text(`Treino: ${currentWorkoutName}`, doc.internal.pageSize.width / 2, y, { align: 'center' });
+        y += 15; // Aumenta o espaçamento após o título
+
+        // ---- Lista de Exercícios ----
         workoutData.forEach((exercise, index) => {
-            const li = document.createElement('li');
-            li.style.marginBottom = '15px';
-            li.style.padding = '10px';
-            li.style.border = '1px solid #ddd';
-            li.style.borderRadius = '8px';
-            li.style.textAlign = 'left';
-            li.style.backgroundColor = '#f9f9f9';
+            const exerciseBlockHeight = 40; // Altura estimada do bloco do exercício
+            checkPageBreak(exerciseBlockHeight);
 
-            li.innerHTML = `
-                <strong>${index + 1}. ${exercise.name}</strong><br>
-                Séries: ${exercise.sets}<br>
-                Repetições: ${exercise.reps}<br>
-                Carga: ${exercise.exerciseLoad || 'N/A'}<br>
-                Descanso: ${exercise.restTime || 'N/A'}<br>
+            // Conteúdo do exercício
+            const exerciseText = `
+                ${index + 1}. ${exercise.name}
+                Séries: ${exercise.sets}
+                Repetições: ${exercise.reps}
+                Carga: ${exercise.exerciseLoad || 'N/A'}
+                Descanso: ${exercise.restTime || 'N/A'}
                 Observações: ${exercise.observation || 'N/A'}
             `;
-            workoutListUl.appendChild(li);
+
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "bold");
+            doc.text(`${index + 1}. ${exercise.name}`, margin, y);
+            y += 7;
+
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Séries: ${exercise.sets} | Repetições: ${exercise.reps} | Carga: ${exercise.exerciseLoad || 'N/A'}`, margin, y);
+            y += 6;
+            doc.text(`Descanso: ${exercise.restTime || 'N/A'}`, margin, y);
+            y += 6;
+            doc.text(`Observações: ${exercise.observation || 'N/A'}`, margin, y);
+            
+            y += 5; // Espaço antes da linha
+            doc.setDrawColor(200, 200, 200); // Cor da linha (cinza claro)
+            doc.line(margin, y, doc.internal.pageSize.width - margin, y); // Linha separadora
+            y += 10; // Espaço após a linha
         });
-        pdfContentDiv.appendChild(workoutListUl);
 
-        // Adicione o div temporário ao corpo do documento (fora da tela visível)
-        pdfContentDiv.style.position = 'absolute';
-        pdfContentDiv.style.left = '-9999px';
-        document.body.appendChild(pdfContentDiv);
-
-        // Use html2canvas para renderizar o div como uma imagem
-        html2canvas(pdfContentDiv, { scale: 2 }).then(canvas => { // Aumente a escala para melhor qualidade
-            const imgData = canvas.toDataURL('image/png');
-            const { jsPDF } = window.jspdf; // Acesse jsPDF do objeto global window
-            const pdf = new jsPDF('p', 'mm', 'a4'); // 'p' para retrato, 'mm' para milímetros, 'a4' para tamanho A4
-
-            const imgWidth = 210; // Largura A4 em mm
-            const pageHeight = 297; // Altura A4 em mm
-            const imgHeight = canvas.height * imgWidth / canvas.width;
-            let heightLeft = imgHeight;
-            let position = 0;
-
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-
-            while (heightLeft >= 0) {
-                position = heightLeft - imgHeight;
-                pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-            }
-
-            pdf.save(`Treino_${currentWorkoutName}.pdf`);
-
-            // Remova o div temporário
-            document.body.removeChild(pdfContentDiv);
-        }).catch(error => {
-            console.error("Erro ao gerar PDF do treino:", error);
-            alert("Ocorreu um erro ao exportar o treino para PDF.");
-            document.body.removeChild(pdfContentDiv); // Garante que o div seja removido mesmo em erro
-        });
+        // Salva o PDF
+        doc.save(`Treino_${currentWorkoutName}.pdf`);
     }
 
     /**
-     * Exporta a dieta atualmente selecionada para um arquivo PDF.
+     * Exporta a dieta atualmente selecionada para um arquivo PDF com TEXTO.
      */
     function exportCurrentDietToPdf() {
-        // Obtenha o nome da dieta atual do localStorage
         const currentDietName = localStorage.getItem('currentDietNameDiet');
-        // Obtenha todos os planos de dieta do localStorage
         const allDiets = JSON.parse(localStorage.getItem('allDiets')) || {};
         const dietData = allDiets[currentDietName] || [];
 
@@ -122,166 +99,107 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Crie um elemento div temporário para renderizar o conteúdo do PDF
-        const pdfContentDiv = document.createElement('div');
-        pdfContentDiv.style.width = '210mm'; // Largura A4
-        pdfContentDiv.style.padding = '10mm';
-        pdfContentDiv.style.backgroundColor = '#fff';
-        pdfContentDiv.style.boxSizing = 'border-box';
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('p', 'mm', 'a4');
 
-        // Título da Dieta
-        const title = document.createElement('h1');
-        title.textContent = `Dieta: ${currentDietName}`;
-        title.style.textAlign = 'center';
-        title.style.color = '#333';
-        pdfContentDiv.appendChild(title);
+        // ---- Configurações do Documento ----
+        const pageHeight = doc.internal.pageSize.height;
+        const margin = 15;
+        let y = margin;
 
-        // Agrupar itens por refeição e horário para exibição no PDF
+        function checkPageBreak(requiredHeight) {
+            if (y + requiredHeight > pageHeight - margin) {
+                doc.addPage();
+                y = margin;
+            }
+        }
+
+        // ---- Título da Dieta ----
+        doc.setFontSize(22);
+        doc.setFont("helvetica", "bold");
+        doc.text(`Plano de Dieta: ${currentDietName}`, doc.internal.pageSize.width / 2, y, { align: 'center' });
+        y += 15;
+
+        // ---- Agrupamento e Ordenação das Refeições ----
         const mealsGrouped = {};
         dietData.forEach(item => {
             const key = `${item.mealName}-${item.mealTime || 'sem-horario'}`;
             if (!mealsGrouped[key]) {
-                mealsGrouped[key] = {
-                    mealName: item.mealName,
-                    mealTime: item.mealTime,
-                    items: []
-                };
+                mealsGrouped[key] = { mealName: item.mealName, mealTime: item.mealTime, items: [] };
             }
             mealsGrouped[key].items.push(item);
         });
 
         const sortedMeals = Object.values(mealsGrouped).sort((a, b) => {
-            if (a.mealTime && b.mealTime) {
-                return a.mealTime.localeCompare(b.mealTime);
-            }
+            if (a.mealTime && b.mealTime) return a.mealTime.localeCompare(b.mealTime);
             if (!a.mealTime && b.mealTime) return 1;
             if (a.mealTime && !b.mealTime) return -1;
             return a.mealName.localeCompare(b.mealName);
         });
 
+        // ---- Renderização das Refeições ----
         sortedMeals.forEach(mealGroup => {
-            const mealSectionDiv = document.createElement('div');
-            mealSectionDiv.style.marginBottom = '20px';
-            mealSectionDiv.style.border = '1px solid #e0e0e0';
-            mealSectionDiv.style.borderRadius = '8px';
-            mealSectionDiv.style.padding = '15px';
-            mealSectionDiv.style.backgroundColor = '#f9f9f9';
+            checkPageBreak(20); // Espaço para o cabeçalho da refeição
 
-            const mealHeader = document.createElement('h3');
-            mealHeader.textContent = `${mealGroup.mealName} ${mealGroup.mealTime ? `(${mealGroup.mealTime})` : '(Horário não definido)'}`;
-            mealHeader.style.color = '#007bff';
-            mealHeader.style.marginTop = '0';
-            mealHeader.style.marginBottom = '10px';
-            mealSectionDiv.appendChild(mealHeader);
+            const mealHeaderText = `${mealGroup.mealName} ${mealGroup.mealTime ? `(${mealGroup.mealTime})` : ''}`;
+            doc.setFontSize(16);
+            doc.setFont("helvetica", "bold");
+            doc.text(mealHeaderText, margin, y);
+            y += 8;
 
-            const mealItemsList = document.createElement('ul');
-            mealItemsList.style.listStyle = 'none';
-            mealItemsList.style.padding = '0';
-            mealItemsList.style.margin = '0';
-
-            let mealKcal = 0;
-            let mealProtein = 0;
-            let mealCarb = 0;
+            let mealKcal = 0, mealProtein = 0, mealCarb = 0;
 
             mealGroup.items.forEach(item => {
-                const li = document.createElement('li');
-                li.style.marginBottom = '8px';
-                li.style.padding = '10px';
-                li.style.backgroundColor = '#fff';
-                li.style.border = '1px solid #eee';
-                li.style.borderRadius = '6px';
-                li.style.textAlign = 'left';
+                checkPageBreak(15); // Espaço para cada item
+                doc.setFontSize(11);
+                doc.setFont("helvetica", "normal");
+                
+                doc.text(`- ${item.foodName} (${item.quantity}g)`, margin + 2, y);
+                y += 6;
+                doc.text(`  Kcal: ${item.calculatedKcal || '0'} | Prot: ${item.calculatedProtein || '0'}g | Carb: ${item.calculatedCarb || '0'}g`, margin + 4, y);
+                y += 6;
 
-                li.innerHTML = `
-                    <strong>${item.foodName}</strong> (${item.quantity}g)<br>
-                    Kcal: ${item.calculatedKcal || '0'} | Prot: ${item.calculatedProtein || '0'}g | Carb: ${item.calculatedCarb || '0'}g<br>
-                    Obs: ${item.observation || 'N/A'}
-                `;
-                mealItemsList.appendChild(li);
-
-                mealKcal += parseFloat(item.calculatedKcal);
-                mealProtein += parseFloat(item.calculatedProtein);
-                mealCarb += parseFloat(item.calculatedCarb);
+                mealKcal += parseFloat(item.calculatedKcal || 0);
+                mealProtein += parseFloat(item.calculatedProtein || 0);
+                mealCarb += parseFloat(item.calculatedCarb || 0);
             });
-            mealSectionDiv.appendChild(mealItemsList);
-
-            const mealSummaryDiv = document.createElement('div');
-            mealSummaryDiv.style.backgroundColor = '#e2f0fb';
-            mealSummaryDiv.style.padding = '10px';
-            mealSummaryDiv.style.borderRadius = '8px';
-            mealSummaryDiv.style.marginTop = '15px';
-            mealSummaryDiv.style.fontWeight = 'bold';
-            mealSummaryDiv.style.color = '#0056b3';
-            mealSummaryDiv.style.textAlign = 'left';
-            mealSummaryDiv.innerHTML = `
-                <p style="margin: 0;">Total da Refeição: ${mealKcal.toFixed(1)} kcal | ${mealProtein.toFixed(1)}g Prot | ${mealCarb.toFixed(1)}g Carb</p>
-            `;
-            mealSectionDiv.appendChild(mealSummaryDiv);
-
-            pdfContentDiv.appendChild(mealSectionDiv);
+            
+            // Sumário da refeição
+            checkPageBreak(10);
+            doc.setFontSize(10);
+            doc.setFont("helvetica", "italic");
+            doc.text(`Total da Refeição: ${mealKcal.toFixed(1)} kcal | ${mealProtein.toFixed(1)}g Prot | ${mealCarb.toFixed(1)}g Carb`, margin, y);
+            y += 10;
         });
 
-        // Total Geral da Dieta
-        let totalKcal = 0;
-        let totalProtein = 0;
-        let totalCarb = 0;
+        // ---- Sumário Geral ----
+        checkPageBreak(30); // Espaço para o sumário geral
+        let totalKcal = 0, totalProtein = 0, totalCarb = 0;
         dietData.forEach(item => {
-            totalKcal += parseFloat(item.calculatedKcal);
-            totalProtein += parseFloat(item.calculatedProtein);
-            totalCarb += parseFloat(item.calculatedCarb);
+            totalKcal += parseFloat(item.calculatedKcal || 0);
+            totalProtein += parseFloat(item.calculatedProtein || 0);
+            totalCarb += parseFloat(item.calculatedCarb || 0);
         });
 
-        const totalSummaryDiv = document.createElement('div');
-        totalSummaryDiv.style.marginTop = '30px';
-        totalSummaryDiv.style.padding = '20px';
-        totalSummaryDiv.style.backgroundColor = '#f0f8ff';
-        totalSummaryDiv.style.borderRadius = '10px';
-        totalSummaryDiv.style.boxShadow = '0 2px 10px rgba(0,0,0,0.08)';
-        totalSummaryDiv.style.textAlign = 'left';
-        totalSummaryDiv.innerHTML = `
-            <h3>Total Geral da Dieta:</h3>
-            <p>Calorias Totais: <span>${totalKcal.toFixed(1)}</span> kcal</p>
-            <p>Proteínas Totais: <span>${totalProtein.toFixed(1)}</span> g</p>
-            <p>Carboidratos Totais: <span>${totalCarb.toFixed(1)}</span> g</p>
-        `;
-        pdfContentDiv.appendChild(totalSummaryDiv);
+        y += 10; // Espaço antes do sumário geral
+        doc.setDrawColor(100, 100, 100);
+        doc.line(margin, y, doc.internal.pageSize.width - margin, y);
+        y += 10;
 
+        doc.setFontSize(14);
+        doc.setFont("helvetica", "bold");
+        doc.text("Total Geral da Dieta:", margin, y);
+        y += 8;
 
-        // Adicione o div temporário ao corpo do documento (fora da tela visível)
-        pdfContentDiv.style.position = 'absolute';
-        pdfContentDiv.style.left = '-9999px';
-        document.body.appendChild(pdfContentDiv);
+        doc.setFontSize(12);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Calorias Totais: ${totalKcal.toFixed(1)} kcal`, margin, y);
+        y += 7;
+        doc.text(`Proteínas Totais: ${totalProtein.toFixed(1)} g`, margin, y);
+        y += 7;
+        doc.text(`Carboidratos Totais: ${totalCarb.toFixed(1)} g`, margin, y);
 
-        // Use html2canvas para renderizar o div como uma imagem
-        html2canvas(pdfContentDiv, { scale: 2 }).then(canvas => { // Aumente a escala para melhor qualidade
-            const imgData = canvas.toDataURL('image/png');
-            const { jsPDF } = window.jspdf; // Acesse jsPDF do objeto global window
-            const pdf = new jsPDF('p', 'mm', 'a4'); // 'p' para retrato, 'mm' para milímetros, 'a4' para tamanho A4
-
-            const imgWidth = 210; // Largura A4 em mm
-            const pageHeight = 297; // Altura A4 em mm
-            const imgHeight = canvas.height * imgWidth / canvas.width;
-            let heightLeft = imgHeight;
-            let position = 0;
-
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-
-            while (heightLeft >= 0) {
-                position = heightLeft - imgHeight;
-                pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-            }
-
-            pdf.save(`Dieta_${currentDietName}.pdf`);
-
-            // Remova o div temporário
-            document.body.removeChild(pdfContentDiv);
-        }).catch(error => {
-            console.error("Erro ao gerar PDF da dieta:", error);
-            alert("Ocorreu um erro ao exportar a dieta para PDF.");
-            document.body.removeChild(pdfContentDiv); // Garante que o div seja removido mesmo em erro
-        });
+        // Salva o PDF
+        doc.save(`Dieta_${currentDietName}.pdf`);
     }
 });
