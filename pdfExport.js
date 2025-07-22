@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Exporta o treino atualmente selecionado para um arquivo PDF com TEXTO.
+     * --- CÓDIGO CORRIGIDO ---
      */
     function exportCurrentWorkoutToPdf() {
         const currentWorkoutName = localStorage.getItem('currentWorkoutName');
@@ -33,6 +34,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const pageHeight = doc.internal.pageSize.height;
         const margin = 15; // margem de 1.5 cm
         let y = margin; // Posição vertical inicial
+        
+        // ---- INÍCIO DA ALTERAÇÃO 1: Definir a largura máxima do texto ----
+        const maxWidth = doc.internal.pageSize.width - margin * 2;
+        // ---- FIM DA ALTERAÇÃO 1 ----
 
         // ---- Função para adicionar uma nova página se necessário ----
         function checkPageBreak(requiredHeight) {
@@ -50,18 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // ---- Lista de Exercícios ----
         workoutData.forEach((exercise, index) => {
-            const exerciseBlockHeight = 40; // Altura estimada do bloco do exercício
-            checkPageBreak(exerciseBlockHeight);
-
-            // Conteúdo do exercício
-            const exerciseText = `
-                ${index + 1}. ${exercise.name}
-                Séries: ${exercise.sets}
-                Repetições: ${exercise.reps}
-                Carga: ${exercise.exerciseLoad || 'N/A'}
-                Descanso: ${exercise.restTime || 'N/A'}
-                Observações: ${exercise.observation || 'N/A'}
-            `;
+            // A altura estimada agora é mais flexível, mas mantemos uma verificação mínima
+            const minimumBlockHeight = 35; 
+            checkPageBreak(minimumBlockHeight);
 
             doc.setFontSize(12);
             doc.setFont("helvetica", "bold");
@@ -74,7 +70,25 @@ document.addEventListener('DOMContentLoaded', () => {
             y += 6;
             doc.text(`Descanso: ${exercise.restTime || 'N/A'}`, margin, y);
             y += 6;
-            doc.text(`Observações: ${exercise.observation || 'N/A'}`, margin, y);
+
+            // ---- INÍCIO DA ALTERAÇÃO 2: Lógica de quebra de linha para Observações ----
+            
+            // 1. Monta o texto completo que será impresso
+            const observationText = `Observações: ${exercise.observation || 'N/A'}`;
+
+            // 2. Usa a função splitTextToSize para quebrar o texto em linhas
+            const observationLines = doc.splitTextToSize(observationText, maxWidth);
+            
+            // 3. Verifica se o bloco de texto cabe na página atual
+            checkPageBreak(observationLines.length * 6); // Estima 6mm de altura por linha
+
+            // 4. Imprime cada linha do array gerado
+            observationLines.forEach(line => {
+                doc.text(line, margin, y);
+                y += 6; // Incrementa a posição Y para a próxima linha
+            });
+
+            // ---- FIM DA ALTERAÇÃO 2 ----
             
             y += 5; // Espaço antes da linha
             doc.setDrawColor(200, 200, 200); // Cor da linha (cinza claro)
@@ -88,8 +102,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Exporta a dieta atualmente selecionada para um arquivo PDF com TEXTO.
+     * (Esta função permanece inalterada)
      */
     function exportCurrentDietToPdf() {
+        // ... seu código original da dieta aqui ...
         const currentDietName = localStorage.getItem('currentDietNameDiet');
         const allDiets = JSON.parse(localStorage.getItem('allDiets')) || {};
         const dietData = allDiets[currentDietName] || [];
